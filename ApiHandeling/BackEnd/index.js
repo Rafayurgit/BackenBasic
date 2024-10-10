@@ -2,8 +2,9 @@ import express from 'express';
 
 const fetProducts=async ()=>{
     try{
-        const result= await fetch('https://api.freeapi.app/api/v1/public/randomproducts').then(result=>result.json())
-        const products=await result.data.data;
+        const response= await fetch('https://api.freeapi.app/api/v1/public/randomproducts');
+        const result=await response.json();
+        const products= result.data.data;
         console.log(products);
         // const response = await fetch('https://api.freeapi.app/api/v1/public/randomproducts');
         // const result = await response.json(); // Await for JSON conversion
