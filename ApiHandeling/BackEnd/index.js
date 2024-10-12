@@ -23,8 +23,13 @@ const fetProducts=async ()=>{
 const app= express();
 const port=process.env.PORT || 3000;
 
+app.get('/', (req, res) => {
+    res.send('API is running');
+});
 
-app.get('/get', async(req, res)=>{
+
+
+app.get('/api/get', async(req, res)=>{
 
     const products= await fetProducts()
 
