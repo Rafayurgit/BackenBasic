@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-const todoSchema= mongoose.Schema({
+const todoSchema=new mongoose.Schema({
     content:{
         type:String,
         require:true,
     },
     complete:{
-        type:boolean,
+        type:Boolean,
         default:false
     },
     createdBy:{
