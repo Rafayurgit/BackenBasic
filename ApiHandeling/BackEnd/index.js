@@ -4,7 +4,7 @@ const fetProducts=async ()=>{
     try{
         const response= await fetch('https://api.freeapi.app/api/v1/public/randomproducts');
         const result=await response.json();
-        const products= result.data.data;
+        const products= result.data;
         console.log(products);
         // const response = await fetch('https://api.freeapi.app/api/v1/public/randomproducts');
         // const result = await response.json(); // Await for JSON conversion
