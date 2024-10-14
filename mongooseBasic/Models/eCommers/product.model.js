@@ -3,11 +3,11 @@ import mongoose from 'mongoose';
 const productSchema= new mongoose.Schema({
     name:{
         type:String,
-        require:true
+        required:true
     },
     description:{
         type:String,
-        require:true,
+        required:true,
     },
     productImage:{
         type:String,
@@ -22,13 +22,13 @@ const productSchema= new mongoose.Schema({
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Categoty",
+        ref:"Category",
         required:true,
     },
     owner:{
-        type:mongoose.Schema.TYpes.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        
+
     }
 },{timestamps:true})
 
