@@ -7,13 +7,13 @@ const patientSchema= mongoose.Schema({
     },
     age:{
         type:Number,
-        reuired:true
+        required:true
     },
-    bloodGrou:{
+    bloodGroup:{
         type:String,
         required:true
     },
-    diagonsedWidth:{
+    diagnosedWith:{
         type:String,
         required:true,
     },
