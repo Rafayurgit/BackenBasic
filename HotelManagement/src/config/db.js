@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const mongoURL= "mongodb://localhost:27017/hotelManagement";
 
-mongoose.connection(mongoURL,{
-    useNewUrlParse:true,
+mongoose.connect(mongoURL,{
+    useNewUrlParser:true,
     useUnifiedTopology:true,
 })
 
@@ -20,3 +20,5 @@ db.on("disconnect", ()=>{
     console.log("mongoDb disconnected");
     
 })
+
+module.exports= db;

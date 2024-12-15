@@ -1,4 +1,6 @@
 const express = require("express");
+
+const db = require("./config/db.js")
 const app= express();
 const PORT=process.env.PORT|| 8080;
 
