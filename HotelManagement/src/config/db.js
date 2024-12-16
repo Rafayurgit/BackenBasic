@@ -16,7 +16,7 @@ db.on("connected", ()=>{
 db.on("err", (err)=>{
     console.log("Error occured while connecting db", err);
 })
-db.on("disconnect", ()=>{
+db.on("disconnected", ()=>{
     console.log("mongoDb disconnected");
     
 })
