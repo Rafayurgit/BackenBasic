@@ -16,19 +16,29 @@ app.get("/", (req,res)=>{
     res.send("Hello world")
 })
 
-app.post("/person", (req,res)=>{
-    const data= req.body;
-    const newPerson=new person(data);
+app.post("/person", async(req,res)=>{
+    
 
-    newPerson.save((error, savedPerson)=>{
-        if(error){
-            console.log("Error saving person", error);
+    try{
+
+        const data= req.body;
+        const newPerson=new person(data);
+        const response= await newPerson.save();
+        console.log("Person data saved successfully");    
+        res.status(200).json(savedPerson);
+
+    }catch(error){
+        console.log("Error saving person", error);
             res.status(500).json({error: "Internal server error"})
-        }else{
-            console.log("Person data saved successfully");
-            res.status(200).json(savedPerson);
-        }
-    })
+    }
+
+    // newPerson.save((error, savedPerson)=>{
+    //     if(error){
+            
+    //     }else{
+            
+    //     }
+    // })
 })
 
 
