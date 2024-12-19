@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const mongoURL= "mongodb://localhost:27017/hotelManagement";
 
 mongoose.connect(mongoURL,{
@@ -21,4 +21,4 @@ db.on("disconnected", ()=>{
     
 })
 
-module.exports= db;
+export default db;

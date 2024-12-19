@@ -1,12 +1,14 @@
-const express = require("express");
+import express from "express";
 
-const db = require("./config/db.js")
-const person= require('./models/person.model.js')
+import db from "./config/db.js"; 
+import {Person} from "./models/person.model.js";
 
-const bodyParser= require("body-parser");
-app.use(bodyParser.json())
+import bodyParser from "body-parser";
 
 const app= express();
+app.use(bodyParser.json())
+
+
 const PORT=process.env.PORT|| 8080;
 
 
