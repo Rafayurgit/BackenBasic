@@ -24,7 +24,7 @@ app.post("/person", async(req,res)=>{
     try{
 
         const data= req.body;
-        const newPerson=new person(data);
+        const newPerson=new Person(data);
         const response= await newPerson.save();
         console.log("Person data saved successfully");    
         res.status(200).json(savedPerson);
