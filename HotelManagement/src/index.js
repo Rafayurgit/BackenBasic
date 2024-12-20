@@ -43,6 +43,17 @@ app.post("/person", async(req,res)=>{
     // })
 })
 
+app.get("/person", async(req,res)=>{
+    try{
+        const data= await Person.find();
+        console.log("Data fetched");
+        res.status(200).json(data)
+    }catch(error){
+        console.log("Error occured". error);
+        res.status(500).json({error: "Internal server error"})
+    }
+})
+
 
 app.listen(PORT, ()=>{
     console.log(`Server is listining on ${PORT}`);
