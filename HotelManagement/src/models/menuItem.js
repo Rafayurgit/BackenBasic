@@ -6,12 +6,12 @@ const MenuSchema = new mongoose.Schema({
         required:true,
     },
     peice:{
-        type:number,
+        type:Number,
         required:true
     },
     taske:{
         type:String,
-        enum:[sweet, spicy,salty]
+        enum:["sweet", "spicy","salty"]
     },
     is_drink:{
         type:Boolean,
@@ -25,4 +25,4 @@ const MenuSchema = new mongoose.Schema({
         default:0
     }
 })
-export default MenuItem= mongoose.model("MenuItem", MenuSchema)
+export const MenuItem= mongoose.model("MenuItem", MenuSchema)
