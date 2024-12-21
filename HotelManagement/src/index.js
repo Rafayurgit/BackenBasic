@@ -43,16 +43,19 @@ app.post("/person", async(req,res)=>{
     // })
 })
 
-app.get("/person", async(req,res)=>{
-    try{
-        const data= await Person.find();
-        console.log("Data fetched");
-        res.status(200).json(data)
-    }catch(error){
-        console.log("Error occured". error);
-        res.status(500).json({error: "Internal server error"})
+app.post("/person", async (req, res) => {
+    try {
+      const data = req.body;
+      const newPerson = new Person(data);
+      const savedPerson = await newPerson.save();
+      console.log("Person data saved successfully");
+      res.status(200).json(savedPerson);
+    } catch (error) {
+      console.error("Error saving person:", error.message);
+      res.status(500).json({ error: error.message });
     }
-})
+  });
+  
 
 
 app.listen(PORT, ()=>{
