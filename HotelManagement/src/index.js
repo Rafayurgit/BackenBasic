@@ -55,4 +55,16 @@ app.get("/menu", async(req, res)=>{
     }
 })
 
+app.post("/menu", async(req,res)=>{
+    try {
+        const data= req.body;
+        const newItem= await new MenuItem(data).save();
+        res.status(200).json(newItem)
+        console.log("Data Saved Successfully");
+    } catch (error) {
+        console.log("Error while saving data",Error.message);
+        res.status(500).json({Error: error.message})
+    }
+})
+
 
