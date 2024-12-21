@@ -38,8 +38,23 @@ app.get("/person", async(req,res)=>{
         console.log("Data fetched successfully");
         res.status(200).json(data);
     } catch (error) {
-        console.log(Error);
+        console.log(error);
         res.status(500).json({error: "Internal swrver error"})
+    }
+})
+
+app.get("/person/:workType", async(req,res)=>{
+    try {
+        const workType=req.params.workType;
+        if(workType==="chef" || workType==="waiter", workType==="Manager"){
+            const response= await Person.find({worker:workType});
+            res.status(200).json(response);
+            console.log("Data fetched successfully");
+        }
+        
+    } catch (error) {
+        console.log("Error while fetching",error.message);
+        res.status(500).json({error: error.message})
     }
 })
 
@@ -62,7 +77,7 @@ app.post("/menu", async(req,res)=>{
         res.status(200).json(newItem)
         console.log("Data Saved Successfully");
     } catch (error) {
-        console.log("Error while saving data",Error.message);
+        console.log("Error while saving data",error.message);
         res.status(500).json({Error: error.message})
     }
 })
