@@ -44,12 +44,15 @@ app.get("/person", async(req,res)=>{
 })
 
   
-// app.get("/menu", async(req, res)=>{
-//     try {
-        
-//     } catch (error) {
-        
-//     }
-// })
+app.get("/menu", async(req, res)=>{
+    try {
+        const response = await MenuItem.find();
+        res.status(200).json(response);
+        console.log("Data fetched successfully");
+    } catch (error) {
+        console.log(Error);
+        res.status(500).json({Error: "Internal server error"})
+    }
+})
 
 
