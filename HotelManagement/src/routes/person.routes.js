@@ -1,10 +1,10 @@
-import {express} from "express";
 import { Router } from "express";
-import { Person } from "../models/person.model";
+import {Person} from "../models/person.model.js"
+
 
 const router= Router();
 
-router.post("/person", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
       const data = req.body;
       const newPerson = new Person(data);
@@ -17,7 +17,7 @@ router.post("/person", async (req, res) => {
     }
 });
 
-router.get("/person", async(req,res)=>{
+router.get("/", async(req,res)=>{
     try {
         const data = await Person.find();
         console.log("Data fetched successfully");
@@ -28,7 +28,7 @@ router.get("/person", async(req,res)=>{
     }
 })
 
-router.get("/person/:workType", async(req,res)=>{
+router.get("/:workType", async(req,res)=>{
     try {
         const workType=req.params.workType;
         if(workType==="chef" || workType==="waiter", workType==="Manager"){

@@ -1,10 +1,9 @@
-import express from "express";
 import { Router } from "express";
-import { MenuItem } from "../models/menuItem";
+import { MenuItem } from "../models/menuItem.js";
 
 const router= Router();
 
-router.get("/menu", async(req, res)=>{
+router.get("/", async(req, res)=>{
     try {
         const response = await MenuItem.find();
         res.status(200).json(response);
@@ -15,7 +14,9 @@ router.get("/menu", async(req, res)=>{
     }
 })
 
-router.post("/menu", async(req,res)=>{
+
+
+router.post("/", async(req,res)=>{
     try {
         const data= req.body;
         const newItem= await new MenuItem(data).save();
@@ -26,5 +27,7 @@ router.post("/menu", async(req,res)=>{
         res.status(500).json({Error: error.message})
     }
 })
+
+
 
 export {router};

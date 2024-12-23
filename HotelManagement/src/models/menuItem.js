@@ -9,9 +9,9 @@ const MenuSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    taske:{
+    taste:{
         type:String,
-        enum:["sweet", "spicy","salty"]
+        enum:["sweet","spicy","salty"]
     },
     is_drink:{
         type:Boolean,
