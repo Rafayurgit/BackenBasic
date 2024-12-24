@@ -43,4 +43,24 @@ router.get("/:workType", async(req,res)=>{
     }
 })
 
+router.put("/:id", async(req,res)=>{
+    try {
+        const personId= req.params.id;
+        const updatedData=req.body;
+
+        const response= await Person.findByIdAndUpdate(personId,updatedData,{
+            new :true,
+            runValidators:true
+        })
+
+        if(!response){
+            return res.status(404).json({error:"prson not found"});
+        }
+
+    } catch (error) {
+        console.log(error.message, "Error while updatinf perons data");
+        return res.status(500).json({error:error.message})
+    }
+})
+
 export {router};
