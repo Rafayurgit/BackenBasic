@@ -66,4 +66,21 @@ router.put("/:id", async(req,res)=>{
     }
 })
 
+router.delete("/:id", async(req,res)=>{
+    try {
+        const personId=req.params.id;
+        const response= await Person.findByIdAndDelete(personId);
+        if(!response){
+            res.status(404).json({error: "Person not found"})
+        }
+        console.log("data deleted");
+        res.status(200).json({message:"Person deleted successfully"})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:error.message})
+    }
+    
+    
+})
+
 export {router};
