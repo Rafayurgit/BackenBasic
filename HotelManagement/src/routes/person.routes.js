@@ -56,9 +56,12 @@ router.put("/:id", async(req,res)=>{
         if(!response){
             return res.status(404).json({error:"prson not found"});
         }
+        console.log("Data updated");
+        rfes.status(200).json(response)
+        
 
     } catch (error) {
-        console.log(error.message, "Error while updatinf perons data");
+        console.log(error.message, "Error while updating perons data");
         return res.status(500).json({error:error.message})
     }
 })
