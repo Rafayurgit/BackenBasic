@@ -26,7 +26,7 @@ app.get("/", (req,res)=>{
 })
 
 app.use("/person", personRoute);
-app.use("/menu", menuRoute);
+app.use("/menu", localAuthMiddleware ,menuRoute);
 
 
 
