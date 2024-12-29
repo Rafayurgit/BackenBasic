@@ -25,7 +25,7 @@ app.get("/", (req,res)=>{
     res.send("Hello world")
 })
 
-app.use("/person", localAuthMiddleware, personRoute);
+app.use("/person", personRoute);
 app.use("/menu" ,menuRoute);
 
 
