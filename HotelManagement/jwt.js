@@ -14,4 +14,8 @@ const jwtAuthMiddleware=(req,res,next)=>{
     }
 }
 
-export default jwtAuthMiddleware;
+const generateJwt=(userData)=>{
+    return jwt.sign(userData,process.env.JWT_SECRET)
+}
+
+export {jwtAuthMiddleware, generateJwt};
