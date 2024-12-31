@@ -1,4 +1,6 @@
 import express from "express";
+import dotenv from 'dotenv';
+
 
 import db from "./config/db.js"; 
 import {Person} from "./models/person.model.js";
@@ -15,6 +17,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(passport.initialize())
 
+
 const localAuthMiddleware= passport.authenticate("local", {session: false});
 
 app.listen(PORT, ()=>{
@@ -24,6 +27,7 @@ app.listen(PORT, ()=>{
 app.get("/", (req,res)=>{
     res.send("Hello world")
 })
+dotenv.config();
 
 app.use("/person", personRoute);
 app.use("/menu" ,menuRoute);

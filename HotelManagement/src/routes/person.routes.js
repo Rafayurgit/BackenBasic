@@ -1,16 +1,22 @@
 import { Router } from "express";
-import {Person} from "../models/person.model.js"
+import {Person} from "../models/person.model.js";
+import { jwtAuthMiddleware, generateJwt } from "../../jwt.js";
 
 
 const router= Router();
 
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
       const data = req.body;
       const newPerson = new Person(data);
       const savedPerson = await newPerson.save();
+
+      const token= generateJwt(savedPerson.username);
+      console.log("token is :", token);
+
       console.log("Person data saved successfully");
-      res.status(200).json(savedPerson);
+      res.status(200).json({response:savedPerson, token :token});
+
     } catch (error) {
       console.error("Error saving person:", error.message);
       res.status(500).json({ error: error.message });
