@@ -29,7 +29,7 @@ router.post("/login", async(req, res)=>{
         const user= await Person.findOne({username:username});
     
         if(!user || !(await user.comparePassword(password))){
-            res.status(401).json({error: error.message, message: "Username or password Incorrect"})
+            res.status(401).json({error: "Username or password Incorrect"})
         }
     
         const payLoad={
@@ -38,7 +38,7 @@ router.post("/login", async(req, res)=>{
         }
         const token = generateJwt(payLoad)
     
-        res.json(token);
+        res.json({token});
     } catch (error) {
         res.status(500).json({error:error.message, message:"Internal server error"})
     }
