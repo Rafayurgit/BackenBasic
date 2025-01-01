@@ -55,6 +55,20 @@ router.get("/", jwtAuthMiddleware, async(req,res)=>{
     }
 })
 
+router.get("/profile",jwtAuthMiddleware, async(req,res)=>{
+    try {
+        const userData= req.user;
+        const userId= userData.id;
+        const user = await Person.findById(userId);
+
+        if(!user){
+            return res.status(404).json({error:"User Not found"})
+        }return res.status(200).json({user});
+    } catch (error) {
+        res.status(500).json({error:"Internal server error"})
+    }
+})
+
 router.get("/:workType", async(req,res)=>{
     try {
         const workType=req.params.workType;
