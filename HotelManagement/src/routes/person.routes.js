@@ -23,6 +23,27 @@ router.post("/signup", async (req, res) => {
     }
 });
 
+router.post("/login", async(req, res)=>{
+    try {
+        const {username, password}= req.body;
+        const user= await Person.findOne({username:username});
+    
+        if(!user || !(await user.comparePassword(password))){
+            res.status(401).json({error: error.message, message: "Username or password Incorrect"})
+        }
+    
+        const payLoad={
+            id:user.id,
+            username:user.username
+        }
+        const token = generateJwt(payLoad)
+    
+        res.json(token);
+    } catch (error) {
+        res.status(500).json({error:error.message, message:"Internal server error"})
+    }
+})
+
 router.get("/", async(req,res)=>{
     try {
         const data = await Person.find();
