@@ -3,21 +3,47 @@ import mongoose from "mongoose";
 const userSchema= new Mongoose.Schema({
     name:{
         type:String,
-        require:true
+        required:true
     },
     username:{
         type:String,
-        require:true,
+        required:true,
         unique:true,
     },
     email:{
         type:String,
-        require:true,
+        required:true,
         unique:true
     },
     password:{
         type:String,
-        require:true,
+        required:true,
+    },
+    age:{
+        type:Number,
+        required:true
+    },
+    mobile:{
+        type:Number,
+        required:true,
+    },
+    address:{
+        type:String,
+        required:true,
+    },
+    adharCard:{
+        type:Number,
+        required:true,
+        unique:true
+    },
+    role:{
+        type:String,
+        enum:["admin", "voter"],
+        default:"voter",
+    },
+    isVoted:{
+        type:Boolean,
+        default:false
     }
 })
 
