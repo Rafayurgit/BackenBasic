@@ -50,6 +50,24 @@ router.get("/profile", jwtAuthMiddleware, async(req,res)=>{
         res.status(200).json({user});
     } catch (error) {
         res.status(500).json({error:error.message, message:"Internal server error"})
+    }
+})
 
+router.put("/profile/password", async(req,res)=>{
+    try {
+        const userId= req.user.id;
+        const {currentPassword, newPassword}= req.body;
+
+        const user= await User.findById(userId);
+        if(!(await user.comparePassword(currentPassword))){
+            return res.status(401).json({error:"Invalid password"})
+        }
+
+        user.password= newPassword;
+        await user.save();
+        console.log("Password Updated");
+        res.status(200).json({message:"Password updated"})
+    } catch (error) {
+        res.status(500).json({error:error.message, message:"Internal server error"})
     }
 })
