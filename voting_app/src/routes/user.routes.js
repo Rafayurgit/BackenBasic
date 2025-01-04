@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../models/user.model.js"
 import { generateJwt } from "../jwt.js";
+import { jwtAuthMiddleware } from "../../../HotelManagement/jwt.js";
 
 
 const router= express.Router();
@@ -35,6 +36,18 @@ router.post("/login", async(req,res)=>{
 
         const token=generateJwt(payLoad)
         res.status(200).json({token});
+    } catch (error) {
+        res.status(500).json({error:error.message, message:"Internal server error"})
+
+    }
+})
+
+router.get("/profile", jwtAuthMiddleware, async(req,res)=>{
+    try {
+        const userData= req.body;
+        const userId=userData.id;
+        const user= await User.findById(userId);
+        res.status(200).json({user});
     } catch (error) {
         res.status(500).json({error:error.message, message:"Internal server error"})
 
