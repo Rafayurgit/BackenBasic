@@ -19,3 +19,5 @@ db.on("err", ()=>{
 db.on("Disconnected", ()=>{
     console.log("Mongo server disconnected");
 })
+
+export default db;

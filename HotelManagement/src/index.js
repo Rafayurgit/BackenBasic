@@ -3,8 +3,6 @@ import dotenv from 'dotenv';
 
 
 import db from "./config/db.js"; 
-import {Person} from "./models/person.model.js";
-import {MenuItem} from "./models/menuItem.js";
 import bodyParser from "body-parser";
 import {router as personRoute} from "./routes/person.routes.js";
 import { router as menuRoute } from "./routes/menu.routes.js";
