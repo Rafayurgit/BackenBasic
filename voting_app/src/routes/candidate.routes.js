@@ -16,7 +16,20 @@ const checkAdminROle=async(userId)=>{
     }
 }
 
-router.post("/", jwtAuthMiddleware, (req,res)=>{
-
+router.post("/", jwtAuthMiddleware, async(req,res)=>{
+    try {
+        if(!(await checkAdminROle(req.user.id))){
+            return res.status(403).json({message:"user doesn't have admin role"})
+        }
     
+        const data= req.body;
+        const candidate= new Candidate(data);
+        const response= candidate.save();
+        console.log("Candidate data saved");
+        
+        res.status(200).json({response: response})
+    } catch (error) {
+        res.status(500).json({error:error.message, message:"Internal servar error"})   
+    }
+
 })
