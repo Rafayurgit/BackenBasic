@@ -57,3 +57,21 @@ router.put("/:candidateId",jwtAuthMiddleware, async(req,res)=>{
         res.status(500).json({error:error.message, message:"Internal Server Error"})
     }
 })
+
+router.delete("/:candidateId", async(req,res)=>{
+    try {
+        if(!(await checkAdminROle(req.user.id))) return res.status(403).json({message:"User doesn't have admin role"})
+        
+        const userId= req.params.candidateId;
+
+        await User.findByIdAndDelete(userId);
+        console.log("Candidate deleted successfully");
+        res.status(200).json({message:"User deleted successfully"})
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:"Internal server error"})
+        
+    }
+    
+})
