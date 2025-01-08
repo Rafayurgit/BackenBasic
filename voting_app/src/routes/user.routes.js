@@ -10,6 +10,10 @@ router.post("/signUp", async(req,res)=>{
     try {
         const data= req.body;
         const newUser=await new User(data).save();
+
+        const adminUser= await User.findOne({role:"Admin"})
+        if(data.role==="admin" && adminUser) return res.status(400).json({error:"Admin already exist"})
+            
         console.log("Data Saved");
 
         const payLoad={
