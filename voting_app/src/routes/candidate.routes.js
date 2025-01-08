@@ -2,6 +2,7 @@ import { Router } from "express";
 import Candidate from "../models/candidate.model"
 import { User } from "../models/user.model";
 import { jwtAuthMiddleware } from "../../../HotelManagement/jwt";
+import { use } from "passport";
 
 const router=Router();
 
@@ -73,5 +74,31 @@ router.delete("/:candidateId", async(req,res)=>{
         res.status(500).json({error:"Internal server error"})
         
     }
-    
+})
+
+router.post("/vote/:candidateId", async(req,res)=>{
+    const userId= req.user.id;
+    const candidateId=req.params.candidateId;
+
+    try {
+        const user= await User.findById(userId);
+        const candidate= await Candidate.findById(candidateId);
+
+        if(!candidate) return res.status(404).json({error:"candidate not found"});
+        if(!use) return res.status(404).json({error:"User not found" });
+        if(user.role==="Admin")return res.status(400).json({error:"Admin can not vote"});
+        if(user.isVoted) return res.status(403).json({error:"You have already voted"});
+
+        candidate.votes.push({user:userId})
+        candidate.voteCount++;
+        await candidate.save();
+
+        user.isVoted=true;
+        await user.save();
+
+        res.status(200).json({message:"Vote recored successfully"})
+
+    } catch (error) {
+        res.status(500).json({error:error.message, message:"Internal server error"})
+    }
 })
