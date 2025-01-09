@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { User } from "./user.model";
+import { User } from "./user.model.js";
 
 const candidateSchema= new mongoose.Schema({
     name:{
@@ -32,4 +32,4 @@ const candidateSchema= new mongoose.Schema({
 })
 
 
-export const Candidate= mongoose.model("Candidate", candidateSchema)
+export const Candidate= mongoose.model("Candidate", candidateSchema);

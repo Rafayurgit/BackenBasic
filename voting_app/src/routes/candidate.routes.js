@@ -1,8 +1,7 @@
 import { Router } from "express";
-import Candidate from "../models/candidate.model"
-import { User } from "../models/user.model";
-import { jwtAuthMiddleware } from "../../../HotelManagement/jwt";
-import { use } from "passport";
+import {Candidate} from "../models/candidate.model.js"
+import { User } from "../models/user.model.js";
+import { jwtAuthMiddleware } from "../../../HotelManagement/jwt.js";
 
 const router=Router();
 
@@ -129,3 +128,5 @@ router.get("/vote/count", async (req,res) => {
         res.status(500).json({error:error.message, message:"Internal server error"})
     }
 })
+
+export {router};

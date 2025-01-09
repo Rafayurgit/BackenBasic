@@ -12,11 +12,11 @@ db.on("connected", ()=>{
     console.log("connected to Mongo Server");
 })
 
-db.on("err", ()=>{
+db.on("error", ()=>{
     console.log("Error occured while connecting to server");
 })
 
-db.on("Disconnected", ()=>{
+db.on("disconnected", ()=>{
     console.log("Mongo server disconnected");
 })
 
