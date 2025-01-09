@@ -19,3 +19,5 @@ const jwtAuthMiddleware=(req,res,next)=>{
         return res.status(500).json({error:error.message, message:"Invalid token"})
     }
 }
+
+export {jwtAuthMiddleware, generateJwt};

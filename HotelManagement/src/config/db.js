@@ -10,7 +10,6 @@ const db = mongoose.connection;
 
 db.on("connected", ()=>{
     console.log("Connected to MongoDB server");
-    
 })
 
 db.on("err", (err)=>{

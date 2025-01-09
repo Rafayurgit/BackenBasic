@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv';
 import bodyParser from "body-parser";
-import {user as userRoute} from "../src/routes/user.routes.js"
+import {router as userRoute} from "../src/routes/user.routes.js"
 
 
 

@@ -1,4 +1,4 @@
-import mongoose, { connect } from "mongoose";
+import mongoose from "mongoose";
 const mongoURL= "mongodb://localhost:27017/votingApp";
 
 mongoose.connect(mongoURL,{
@@ -6,7 +6,7 @@ mongoose.connect(mongoURL,{
     useUnifiedTopology:true,
 })
 
-db.connection= mongoose.connection;
+const db= mongoose.connection;
 
 db.on("connected", ()=>{
     console.log("connected to Mongo Server");
