@@ -103,6 +103,16 @@ router.post("/vote/:candidateId", async(req,res)=>{
     }
 })
 
+router.get("/candidate", async(req,res)=>{
+    try {
+        const data = await Candidate.find();
+        res.status(200).json({data:data})
+    } catch (error) {
+        res.status(500).json({error:error.message, message:"Internal server error"})
+
+    }
+})
+
 router.get("/vote/count", async (req,res) => {
     try {
         
