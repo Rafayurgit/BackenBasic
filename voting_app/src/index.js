@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import bodyParser from "body-parser";
 import {router as userRoute} from "../src/routes/user.routes.js"
 import { router as candidateRoute} from "../src/routes/candidate.routes.js";
+import db from "./config/db.js";
 
 dotenv.config();
 
