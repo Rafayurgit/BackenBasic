@@ -31,13 +31,20 @@ router.post("/signUp", async(req,res)=>{
 router.post("/login", async(req,res)=>{
     try {
         const {adharNo, password}= req.body;
-        const user= await User.findOne({adharCard:adharNo})
-        if(!user || !(await user.comparePassword(password))){
+        if(!adharNo || !password){
             return res.status(401).json({error:"Invalid username or password"})
         }
+
+        const user= await User.findOne({adharCard:adharNo})
+
+        if( !user || !(await user.comparePassword(password))){
+            return res.status(401).json({error: 'Invalid Aadhar Card Number or Password'});
+        }
+
         const payLoad={
             id:user.id
         }
+        
 
         const token=generateJwt(payLoad)
         res.status(200).json({token});
