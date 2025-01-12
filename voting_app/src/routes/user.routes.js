@@ -45,7 +45,6 @@ router.post("/login", async(req,res)=>{
             id:user.id
         }
         
-
         const token=generateJwt(payLoad)
         res.status(200).json({token});
     } catch (error) {

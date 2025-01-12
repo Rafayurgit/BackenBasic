@@ -75,6 +75,23 @@ router.delete("/:candidateId", async(req,res)=>{
     }
 })
 
+router.get("/vote/count", async (req,res) => {
+    try {
+        
+        const candidate=await Candidate.find().sort({voteCount:"desc"})
+        const voteRecord= await candidate.map((data)=>{
+            return {
+                party:data.party,
+                count:data.voteCount
+            }
+        })
+
+        res.status(200).json({voteRecord})
+    } catch (error) {
+        res.status(500).json({error:error.message, message:"Internal server error"})
+    }
+})
+
 router.get("/vote/:candidateId", jwtAuthMiddleware, async(req,res)=>{
     const userId= req.user.id;
     const candidateId=req.params.candidateId;
@@ -112,21 +129,6 @@ router.get("/candidate", async(req,res)=>{
     }
 })
 
-router.get("/vote/count", async (req,res) => {
-    try {
-        
-        const candidate=await Candidate.find().sort({voteCount:"desc"})
-        const voteRecord= await candidate.map((data)=>{
-            return {
-                party:data.party,
-                count:data.voteCount
-            }
-        })
 
-        res.status(200).json({voteRecord})
-    } catch (error) {
-        res.status(500).json({error:error.message, message:"Internal server error"})
-    }
-})
 
 export {router};
